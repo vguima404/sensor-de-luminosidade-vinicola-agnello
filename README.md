@@ -112,5 +112,7 @@ Durante o desenvolvimento, enfrentamos alguns desafios:
 
 - ▶️ [Vídeo no YouTube](https://youtu.be/0kUGRKxl1lo)
 - 💻 [Simulação no Tinkercad](https://www.tinkercad.com/things/gdHTAxjC7YB-fantastic-inari-snaget/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=jaI-__Ze8QaAmT90-9VHP9olcMvoVjhQlYrbrBaEM-A)
-- 📷 [Imagem do Projeto](https://github.com/vguima404/sensor-de-luminosidade-vinicola-agnello/blob/main/Projeto%20Edge%20Arduino.png)
+- 📷 [Imagem do Projeto]
+<img src="https://github.com/vguima404/sensor-de-luminosidade-vinicola-agnello/blob/main/Projeto%20Edge%20Arduino.png" alt="Imagem do projeto no Tinkercard">
+
 

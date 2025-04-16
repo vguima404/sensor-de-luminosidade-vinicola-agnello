@@ -32,6 +32,8 @@ Este sistema é ideal para ambientes de armazenamento sensível, como adegas e v
 
 ### 💻 Software
 - IDE do Arduino → [Download](https://www.arduino.cc/en/software)
+ou
+- Utilização do simulador no Tinkercard → [Site do Tinkercard](https://www.tinkercad.com)
 
 ## 🛠️ Como Reproduzir
 

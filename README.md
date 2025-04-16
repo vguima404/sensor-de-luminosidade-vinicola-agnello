@@ -1,6 +1,6 @@
 # 🌞 Sensor de Luminosidade com Alerta Visual e Sonoro para Vinícola
 
-Este projeto tem como objetivo proteger garrafas de vinho armazenadas em uma vinícola contra a exposição excessiva à luz. Utilizando um sensor de luminosidade (LDR), três LEDs (verde, amarelo e vermelho) e um buzzer, o sistema sinaliza em tempo real o nível de iluminação incidente sobre as garrafas. Quando a luminosidade ultrapassa do nível de alerta (701), o LED amarelo acende e um buzzer é ativado como alerta sonoro.
+Este projeto tem como objetivo proteger garrafas de vinho armazenadas em uma vinícola contra a exposição excessiva à luz. Utilizando um sensor de luminosidade (LDR), três LEDs (verde, amarelo e vermelho) e um buzzer, o sistema sinaliza em tempo real o nível de iluminação incidente sobre as garrafas. Quando a luminosidade ultrapassa um valor de alerta (701), o LED vermelho amarelo e um buzzer é ativado como alerta sonoro.
 
 ## 📦 Descrição do Projeto
 
@@ -18,90 +18,88 @@ Este sistema é ideal para ambientes de armazenamento sensível, como adegas e v
 - 1x Arduino Uno
 - 1x Sensor LDR
 - 3x LEDs (verde, amarelo, vermelho)
-- 3x Resistores para LEDs (220Ω)
+- 3x Resistores para LEDs (220Ω a 330Ω)
 - 1x Resistor para o LDR (10kΩ)
 - 1x Buzzer
 - Cabos jumpers
 - Protoboard
 
 ### 💻 Software
-- IDE do Arduino (https://www.arduino.cc/en/software/) ou TinkerCard (www.tinkercad.com)
-- Placa Arduino configurada e drivers instalados
+- IDE do Arduino → [Download](https://www.arduino.cc/en/software)
 
 ## 🛠️ Como Reproduzir
 
-1. **Monte o circuito**:
-   - LDR entre A0 e VCC.
-   - Resistor de 10kΩ entre A0 e GND.
-   - LEDs conectados aos pinos digitais 10 (verde), 9 (amarelo) e 8 (vermelho), com resistores limitadores.
-   - Buzzer conectado ao pino 7 (positivo) e GND (negativo).
+1. **Monte o circuito:**
+   - Conecte o **LDR entre GND e A0**.
+   - Conecte um **resistor de 10kΩ entre A0 e 5V (VCC)**.
+   - Conecte os LEDs nos pinos 10 (verde), 9 (amarelo) e 8 (vermelho) com resistores.
+   - Conecte o buzzer no pino 7 e GND.
 
-2. **Conecte o Arduino ao computador** via cabo USB.
+2. **Abra a IDE do Arduino** e conecte o Arduino via cabo USB.
 
-3. **Abra a IDE do Arduino**, selecione a placa correta e a porta COM usada.
-
-4. **Copie o código abaixo** para a IDE:
+3. **Copie o código abaixo para a IDE:**
 
 ```cpp
-
-int LEDVerde = 10; // Define a variável LEDVerde com o pino digital 10
-int LEDAmarelo = 9; // Define a variável LEDAmarelo com o pino digital 9
-int LEDVermelho = 8; // Define a variável LEDVermelho com o pino digital 8
-int Buzzer = 7; // Define a variável Buzzer com o pino digital 7
+int LEDVerde = 10;
+int LEDAmarelo = 9;
+int LEDVermelho = 8;
+int Buzzer = 7;
 
 void setup(){
-  Serial.begin(9600); // Inicia a comunicação serial com a taxa de 9600 bps
-  pinMode(Buzzer, OUTPUT); // Configura o pino do Buzzer como saída
-  pinMode(LEDVerde, OUTPUT); // Configura o pino do LED verde como saída
-  pinMode(LEDAmarelo, OUTPUT); // Configura o pino do LED amarelo como saída
-  pinMode(LEDVermelho, OUTPUT); // Configura o pino do LED vermelho como saída
+  Serial.begin(9600);
+  pinMode(Buzzer, OUTPUT);
+  pinMode(LEDVerde, OUTPUT);
+  pinMode(LEDAmarelo, OUTPUT);
+  pinMode(LEDVermelho, OUTPUT);
 }
 
 void loop(){
-  int LDR = analogRead(A0); // Lê o valor do sensor LDR conectado na porta analógica A0
-  Serial.println(LDR); // Mostra o valor lido do LDR no monitor serial
+  int LDR = analogRead(A0);
+  Serial.println(LDR);
 
-  // Utiliza um switch para verificar em qual faixa de luminosidade está o valor lido do LDR
   switch(LDR){
-    
-    case 0 ... 700: // Caso o valor do LDR esteja entre 0 e 700 (ambiente escuro)
-      digitalWrite(LEDVerde, HIGH); // Acende o LED verde
-      digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
-      digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
-      digitalWrite(Buzzer, LOW); // Desliga o buzzer
+    case 0 ... 700:
+      digitalWrite(LEDVerde, HIGH);
+      digitalWrite(LEDAmarelo, LOW);
+      digitalWrite(LEDVermelho, LOW);
+      digitalWrite(Buzzer, LOW);
       break;
-    
-    case 701 ... 950: // Caso o valor do LDR esteja entre 701 e 950 (luminosidade média)
-  	  digitalWrite(LEDVerde, LOW); // Apaga o LED verde
-      digitalWrite(LEDAmarelo, HIGH); // Acende o LED amarelo
-      digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
-      tone(Buzzer, 250); // Toca uma nota de 250 Hz no buzzer
-      delay(3000); // Mantém o som por 3 segundos
-      noTone(Buzzer); // Para de emitir o som no buzzer
-      delay(300); // Espera 300 milissegundos antes de continuar
+
+    case 701 ... 950:
+      digitalWrite(LEDVerde, LOW);
+      digitalWrite(LEDAmarelo, HIGH);
+      digitalWrite(LEDVermelho, LOW);
+      tone(Buzzer, 250);
+      delay(3000);
+      noTone(Buzzer);
+      delay(300);
       break;
-    
-    case 951 ... 1023: // Caso o valor do LDR esteja entre 951 e 1023 (ambiente muito claro)
-      digitalWrite(LEDVerde, LOW); // Apaga o LED verde
-      digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
-      digitalWrite(LEDVermelho, HIGH); // Acende o LED vermelho
-      tone(Buzzer, 250); // Toca uma nota de 250 Hz no buzzer
-      delay(3000); // Mantém o som por 3 segundos
-      noTone(Buzzer); // Para de emitir o som no buzzer
-      delay(300); // Espera 300 milissegundos antes de continuar
+
+    case 951 ... 1023:
+      digitalWrite(LEDVerde, LOW);
+      digitalWrite(LEDAmarelo, LOW);
+      digitalWrite(LEDVermelho, HIGH);
+      tone(Buzzer, 250);
+      delay(3000);
+      noTone(Buzzer);
+      delay(300);
       break;
   }
 }
-
 ```
 
-5. **Envie o código para o Arduino** clicando em "Upload".
+4. **Clique em “Upload” para enviar o código.**
 
-6. **Abra o Monitor Serial** para observar os valores do LDR e testar os diferentes níveis de luminosidade.
+5. **Abra o Monitor Serial** (Ctrl+Shift+M) para visualizar os dados do sensor.
 
 ## ⚠️ Dificuldades Encontradas
 
-Durante o desenvolvimento do projeto, algumas dificuldades foram enfrentadas:
+Durante o desenvolvimento, enfrentamos alguns desafios:
 
-- **Manipulação da frequência do buzzer**: Entender como controlar o som emitido pelo buzzer com a função `tone()` exigiu muitos testes e pesquisa. Foi necessário ajustar o tempo de execução e a frequência para que o alarme não se tornasse contínuo ou irritante.
-- **Aprendizado sobre o sensor LDR**: Interpretar corretamente os valores fornecidos e como manipular o LDR levou um certo tempo. Foram realizados vários testes para calibrar os valores ideais de corte entre os LEDs.
+- **Manipular a frequência do buzzer:** foi necessário entender como a função `tone()` funciona para não deixar o som incômodo e para ter a duração de 3 segundos.
+- **Aprender sobre o LDR:** interpretar os valores lidos pelo sensor e aprender a manipulá-los exigiu muitos testes, foram realizadas pesquisas através de vídeos e documentação.
+
+## 📽️ Demonstração
+
+- ▶️ [Vídeo no YouTube](https://youtu.be/0kUGRKxl1lo)
+- 💻 [Simulação no Tinkercad](https://www.tinkercad.com/things/gdHTAxjC7YB-fantastic-inari-snaget/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=jaI-__Ze8QaAmT90-9VHP9olcMvoVjhQlYrbrBaEM-A)

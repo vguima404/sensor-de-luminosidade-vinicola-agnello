@@ -18,14 +18,14 @@ void loop(){
   // Utiliza um switch para verificar em qual faixa de luminosidade está o valor lido do LDR
   switch(LDR){
     
-    case 0 ... 700: // Caso o valor do LDR esteja entre 0 e 700 (ambiente escuro)
+    case 0 ... 10: // Caso o valor do LDR esteja entre 0 e 700 (ambiente escuro)
       digitalWrite(LEDVerde, HIGH); // Acende o LED verde
       digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
       digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
       digitalWrite(Buzzer, LOW); // Desliga o buzzer
       break;
     
-    case 701 ... 950: // Caso o valor do LDR esteja entre 701 e 950 (luminosidade média)
+    case 11 ... 20: // Caso o valor do LDR esteja entre 701 e 950 (luminosidade média)
   	  digitalWrite(LEDVerde, LOW); // Apaga o LED verde
       digitalWrite(LEDAmarelo, HIGH); // Acende o LED amarelo
       digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
@@ -35,7 +35,7 @@ void loop(){
       delay(300); // Espera 300 milissegundos antes de continuar
       break;
     
-    case 951 ... 1023: // Caso o valor do LDR esteja entre 951 e 1023 (ambiente muito claro)
+    case 21 ... 1023: // Caso o valor do LDR esteja entre 951 e 1023 (ambiente muito claro)
       digitalWrite(LEDVerde, LOW); // Apaga o LED verde
       digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
       digitalWrite(LEDVermelho, HIGH); // Acende o LED vermelho

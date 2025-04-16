@@ -24,7 +24,7 @@ Este sistema é ideal para ambientes de armazenamento sensível, como adegas e v
 - 1x Arduino Uno
 - 1x Sensor LDR
 - 3x LEDs (verde, amarelo, vermelho)
-- 3x Resistores para LEDs (220Ω a 330Ω)
+- 3x Resistores para LEDs (220Ω)
 - 1x Resistor para o LDR (10kΩ)
 - 1x Buzzer
 - Cabos jumpers

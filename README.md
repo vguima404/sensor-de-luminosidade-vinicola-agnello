@@ -1,6 +1,6 @@
 # 🌞 Sensor de Luminosidade com Alerta Visual e Sonoro para Vinícola
 
-Este projeto tem como objetivo proteger garrafas de vinho armazenadas em uma vinícola contra a exposição excessiva à luz. Utilizando um sensor de luminosidade (LDR), três LEDs (verde, amarelo e vermelho) e um buzzer, o sistema sinaliza em tempo real o nível de iluminação incidente sobre as garrafas. Quando a luminosidade ultrapassa um valor de alerta (701), o LED vermelho amarelo e um buzzer é ativado como alerta sonoro.
+Este projeto tem como objetivo proteger garrafas de vinho armazenadas em uma vinícola contra a exposição excessiva à luz. Utilizando um sensor de luminosidade (LDR), três LEDs (verde, amarelo e vermelho) e um buzzer, o sistema sinaliza em tempo real o nível de iluminação incidente sobre as garrafas. Quando a luminosidade ultrapassa um valor de alerta (11), o LED vermelho amarelo e um buzzer é ativado como alerta sonoro.
 
 ### 👥 Participantes
 - Felipe Godoi
@@ -12,9 +12,9 @@ Este projeto tem como objetivo proteger garrafas de vinho armazenadas em uma vin
 
 O funcionamento do sistema se baseia na leitura dos valores de luz captados pelo LDR (Light Dependent Resistor). Esses valores variam de 0 a 1023, sendo que:
 
-- **0 a 700**: iluminação adequada (LED verde aceso)
-- **701 a 950**: alerta de atenção (LED amarelo e buzzer ativados)
-- **951 a 1023**: iluminação crítica (LED vermelho e buzzer ativados)
+- **0 a 10**: iluminação adequada (LED verde aceso)
+- **11 a 20**: alerta de atenção (LED amarelo e buzzer ativados)
+- **21 a 1023**: iluminação crítica (LED vermelho e buzzer ativados)
 
 Este sistema é ideal para ambientes de armazenamento sensível, como adegas e vinícolas, onde o controle da luminosidade é essencial para manter a qualidade do produto.
 
@@ -70,14 +70,14 @@ void loop(){
   // Utiliza um switch para verificar em qual faixa de luminosidade está o valor lido do LDR
   switch(LDR){
     
-    case 0 ... 700: // Caso o valor do LDR esteja entre 0 e 700 (ambiente escuro)
+    case 0 ... 10: // Caso o valor do LDR esteja entre 0 e 10 (ambiente escuro)
       digitalWrite(LEDVerde, HIGH); // Acende o LED verde
       digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
       digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
       digitalWrite(Buzzer, LOW); // Desliga o buzzer
       break;
     
-    case 701 ... 950: // Caso o valor do LDR esteja entre 701 e 950 (luminosidade média)
+    case 11 ... 20: // Caso o valor do LDR esteja entre 11 e 20 (luminosidade média)
   	  digitalWrite(LEDVerde, LOW); // Apaga o LED verde
       digitalWrite(LEDAmarelo, HIGH); // Acende o LED amarelo
       digitalWrite(LEDVermelho, LOW); // Apaga o LED vermelho
@@ -87,7 +87,7 @@ void loop(){
       delay(300); // Espera 300 milissegundos antes de continuar
       break;
     
-    case 951 ... 1023: // Caso o valor do LDR esteja entre 951 e 1023 (ambiente muito claro)
+    case 21 ... 1023: // Caso o valor do LDR esteja entre 21 e 1023 (ambiente muito claro)
       digitalWrite(LEDVerde, LOW); // Apaga o LED verde
       digitalWrite(LEDAmarelo, LOW); // Apaga o LED amarelo
       digitalWrite(LEDVermelho, HIGH); // Acende o LED vermelho
